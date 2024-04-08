@@ -1,5 +1,6 @@
 ﻿using Common;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace ProcessingModule
@@ -51,14 +52,29 @@ namespace ProcessingModule
 			acquisitionWorker.Start();
 		}
 
-        /// <summary>
-        /// Acquisitor thread logic.
-        /// </summary>
+		/// <summary>
+		/// Acquisitor thread logic.
+		/// </summary>
 		private void Acquisition_DoWork()
 		{
-            //TO DO: IMPLEMENT
-        }
+			List<IConfigItem> configItemsList = configuration.GetConfigurationItems();
+			while (true)
+			{
+				acquisitionTrigger.WaitOne();
 
+				foreach (IConfigItem item in configItemsList)
+				{
+					int count = ++item.SecondsPassedSinceLastPoll;
+
+					if (count == item.AcquisitionInterval)
+					{
+						processingManager.ExecuteReadCommand(item, configuration.GetTransactionId(), configuration.UnitAddress, item.StartAddress, item.NumberOfRegisters);
+						count = 0;
+						item.SecondsPassedSinceLastPoll = 0;
+					}
+				}
+			}
+		}
         #endregion Private Methods
 
         /// <inheritdoc />
