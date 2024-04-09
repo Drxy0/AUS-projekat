@@ -25,8 +25,6 @@ namespace Modbus.ModbusFunctions
         /// <inheritdoc/>
         public override byte[] PackRequest()
         {
-			//TO DO: IMPLEMENT
-            
             ModbusReadCommandParameters parameters = CommandParameters as ModbusReadCommandParameters;
 
 			byte[] request = new byte[12];
@@ -50,7 +48,6 @@ namespace Modbus.ModbusFunctions
         /// <inheritdoc />
         public override Dictionary<Tuple<PointType, ushort>, ushort> ParseResponse(byte[] response)
         {
-			//TO DO: IMPLEMENT
 			Dictionary<Tuple<PointType, ushort>, ushort> resposeDictionary = new Dictionary<Tuple<PointType, ushort>, ushort>();
 
 			int byteCount = response[8];
