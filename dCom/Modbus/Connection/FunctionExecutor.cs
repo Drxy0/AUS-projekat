@@ -131,7 +131,7 @@ namespace Modbus.Connection
 				{
 					if (se.ErrorCode != 10054)
 					{
-						throw se;
+						//throw se;
 					}
 					currentCommand = null;
 					this.connectionState = ConnectionState.DISCONNECTED;
