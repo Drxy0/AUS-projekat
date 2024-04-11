@@ -2,7 +2,7 @@ STA 100
 TCP 59759
 
 HR_INT  1 4500  0  0  4095      0  AO  @OtvorenostVentila   4
-DO_INT  2 2300  0  0      1        0  DO  @Svijetlo            2
+DO_REG  2 2300  0  0      1        0  DO  @Svijetlo            2
 HR_INT  1 4501  0  0  4095      0  AO  @Pumpa                4
 IN_REG  3 4600  0  0  4095      0  AI  @Senzor                4
 DI_REG  1 3800  0  0     1      0  DI  @AlarmVoda            2
