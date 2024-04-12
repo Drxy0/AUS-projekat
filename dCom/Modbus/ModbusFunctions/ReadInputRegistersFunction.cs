@@ -24,7 +24,6 @@ namespace Modbus.ModbusFunctions
         /// <inheritdoc />
         public override byte[] PackRequest()
         {
-			//TO DO: IMPLEMENT
 			Console.WriteLine("Request started");
 			// ModbusReadCommandParameters nam treba
 			byte[] recVal = new byte[12];

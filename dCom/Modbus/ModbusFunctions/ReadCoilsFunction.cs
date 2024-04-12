@@ -48,33 +48,33 @@ namespace Modbus.ModbusFunctions
         /// <inheritdoc />
         public override Dictionary<Tuple<PointType, ushort>, ushort> ParseResponse(byte[] response)
         {
-			Dictionary<Tuple<PointType, ushort>, ushort> resposeDictionary = new Dictionary<Tuple<PointType, ushort>, ushort>();
+            Dictionary<Tuple<PointType, ushort>, ushort> resposeDictionary = new Dictionary<Tuple<PointType, ushort>, ushort>();
 
-			int byteCount = response[8];
-			ushort startAddress = ((ModbusReadCommandParameters)CommandParameters).StartAddress;
-			ushort counter = 0;
+            int byteCount = response[8];
+            ushort startAddress = ((ModbusReadCommandParameters)CommandParameters).StartAddress;
+            ushort counter = 0;
 
-			for (int i = 0; i < byteCount; i++)
-			{
-				byte temp = response[9 + i];
-				byte mask = 1;
+            for (int i = 0; i < byteCount; i++)
+            {
+                byte temp = response[9 + i];
+                byte mask = 1;
 
-				ushort quantity = ((ModbusReadCommandParameters)CommandParameters).Quantity;
+                ushort quantity = ((ModbusReadCommandParameters)CommandParameters).Quantity;
 
-				for (int j = 0; j < 8; j++)
-				{
-					ushort value = (ushort)(temp & mask);
-					resposeDictionary.Add(new Tuple<PointType, ushort>(PointType.DIGITAL_OUTPUT, startAddress++), value);
+                for (int j = 0; j < 8; j++)
+                {
+                    ushort value = (ushort)(temp & mask);
+                    resposeDictionary.Add(new Tuple<PointType, ushort>(PointType.DIGITAL_OUTPUT, startAddress++), value);
 
-					temp >>= 1;
-					counter++;
+                    temp >>= 1;
+                    counter++;
 
-					if (counter >= quantity)
-						break;
-				}
-			}
+                    if (counter >= quantity)
+                        break;
+                }
+            }
 
-			return resposeDictionary;
+            return resposeDictionary;
 		}
     }
 }

@@ -48,7 +48,6 @@ namespace Modbus.ModbusFunctions
         /// <inheritdoc />
         public override Dictionary<Tuple<PointType, ushort>, ushort> ParseResponse(byte[] response)
         {
-			//TO DO: IMPLEMENT
 			Dictionary<Tuple<PointType, ushort>, ushort> resposeDictionary = new Dictionary<Tuple<PointType, ushort>, ushort>();
 
 			int byteCount = response[8];
